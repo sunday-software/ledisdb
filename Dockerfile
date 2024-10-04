@@ -1,5 +1,5 @@
 # use builder image to compile ledisdb (without GCO)
-FROM golang:1.9-stretch as builder
+FROM golang:1.23-bookworm as builder
 
 ENV LEDISDB_VERSION 0.6
 
@@ -15,18 +15,20 @@ RUN apt-get update && \
     apt-get install -y \
     ca-certificates \
     wget \
-    gcc-6 \
-    g++-6 \
+    gcc-11 \
+    g++-11 \
     build-essential \
     libsnappy1v5 \
     libsnappy-dev \
     libgflags-dev
 
 # get LedisDB
-RUN wget -O ledisdb-src.tar.gz "https://github.com/ledisdb/ledisdb/archive/v$LEDISDB_VERSION.tar.gz" && \
-    tar -zxf ledisdb-src.tar.gz && \
-    mkdir -p /go/src/github.com/ledisdb/ && \
-    mv ledisdb-$LEDISDB_VERSION /go/src/github.com/ledisdb/ledisdb
+COPY . /go/src/github.com/ledisdb/ledisdb
+# RUN mkdir
+# RUN wget -O ledisdb-src.tar.gz "https://github.com/ledisdb/ledisdb/archive/v$LEDISDB_VERSION.tar.gz" && \
+#     tar -zxf ledisdb-src.tar.gz && \
+#     mkdir -p /go/src/github.com/ledisdb/ && \
+#     mv ledisdb-$LEDISDB_VERSION /go/src/github.com/ledisdb/ledisdb
 
 # build LevelDB
 RUN wget -O leveldb-src.tar.gz "https://github.com/google/leveldb/archive/$LEVELDB_VERSION.tar.gz" && \
@@ -60,12 +62,12 @@ RUN export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/build/lib:/usr/lib && \
     mkdir -p /build/bin && \
     rm -rf /build/bin/* && \
     cd /go/src/github.com/ledisdb/ledisdb && \
-    GOGC=off go build -i -o /build/bin/ledis-server -tags "snappy leveldb rocksdb" cmd/ledis-server/* && \
-    GOGC=off go build -i -o /build/bin/ledis-cli -tags "snappy leveldb rocksdb" cmd/ledis-cli/* && \
-    GOGC=off go build -i -o /build/bin/ledis-benchmark -tags "snappy leveldb rocksdb" cmd/ledis-benchmark/* && \
-    GOGC=off go build -i -o /build/bin/ledis-dump -tags "snappy leveldb rocksdb" cmd/ledis-dump/* && \
-    GOGC=off go build -i -o /build/bin/ledis-load -tags "snappy leveldb rocksdb" cmd/ledis-load/* && \
-    GOGC=off go build -i -o /build/bin/ledis-repair -tags "snappy leveldb rocksdb" cmd/ledis-repair/*
+    GOGC=off go build -o /build/bin/ledis-server -tags "snappy leveldb rocksdb" cmd/ledis-server/* && \
+    GOGC=off go build -o /build/bin/ledis-cli -tags "snappy leveldb rocksdb" cmd/ledis-cli/* && \
+    GOGC=off go build -o /build/bin/ledis-benchmark -tags "snappy leveldb rocksdb" cmd/ledis-benchmark/* && \
+    GOGC=off go build -o /build/bin/ledis-dump -tags "snappy leveldb rocksdb" cmd/ledis-dump/* && \
+    GOGC=off go build -o /build/bin/ledis-load -tags "snappy leveldb rocksdb" cmd/ledis-load/* && \
+    GOGC=off go build -o /build/bin/ledis-repair -tags "snappy leveldb rocksdb" cmd/ledis-repair/*
 
 # grab gosu for easy step-down from root
 # https://github.com/tianon/gosu/releases
@@ -74,13 +76,13 @@ RUN set -ex; \
     wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch"; \
     wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch.asc"; \
     export GNUPGHOME="$(mktemp -d)"; \
-    gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4; \
+    gpg --keyserver keyserver.ubuntu.com --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4; \
     gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu; \
     chmod +x /usr/local/bin/gosu
 
 
 # done building - now create a tiny image with a statically linked Ledis
-FROM debian:stretch-slim
+FROM debian:bookworm-slim
 
 COPY --from=builder /build/lib/* /usr/lib/
 COPY --from=builder /build/bin/ledis-* /bin/
