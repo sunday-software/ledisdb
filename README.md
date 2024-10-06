@@ -1,3 +1,7 @@
+**This fork updates the abandoned ledis repo focusing on the docker image**
+
+**The latest image is located at ghcr.io/sunday-software/ledisdb:latest which contains both linux/amd64 and linux/arm64 (Mac M1) images**
+
 # LedisDB 
 
 [![Build Status](https://travis-ci.org/ledisdb/ledisdb.svg?branch=develop)](https://travis-ci.org/ledisdb/ledisdb) [![codecov](https://codecov.io/gh/ledisdb/ledisdb/branch/master/graph/badge.svg)](https://codecov.io/gh/ledisdb/ledisdb) [![goreportcard](https://goreportcard.com/badge/github.com/ledisdb/ledisdb)](https://goreportcard.com/report/github.com/ledisdb/ledisdb)
