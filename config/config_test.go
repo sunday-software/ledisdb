@@ -4,6 +4,8 @@ import (
 	"os"
 	"reflect"
 	"testing"
+
+	"github.com/pelletier/go-toml/v2"
 )
 
 func TestConfig(t *testing.T) {
@@ -39,4 +41,30 @@ func TestConfig(t *testing.T) {
 			t.Fatalf("must equal %v != %v", c, c1)
 		}
 	}
+}
+
+func TestMutexPersists(t *testing.T) {
+	t.Run("Mutex persists after TOML unmarshal", func(t *testing.T) {
+		cfg := NewConfigDefault()
+		if cfg.m == nil {
+			t.Fatalf("Mutex should not be nil")
+		}
+		err := toml.Unmarshal([]byte(""), cfg)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if cfg.m == nil {
+			t.Fatalf("Mutex should not be nil")
+		}
+	})
+
+	t.Run("Mutex exists after NewConfigWithData", func(t *testing.T) {
+		cfg, err := NewConfigWithFile("./config.toml")
+		if err != nil {
+			t.Fatal(err)
+		}
+		if cfg.m == nil {
+			t.Fatalf("Mutex should not be nil")
+		}
+	})
 }

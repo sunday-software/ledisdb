@@ -1,18 +1,46 @@
+# github.com/BurntSushi/toml v0.3.1
+## explicit
+# github.com/alicebob/gopher-json v0.0.0-20180125190556-5a6b3ba71ee6
+## explicit
+# github.com/alicebob/miniredis v2.5.0+incompatible
+## explicit
 # github.com/cupcake/rdb v0.0.0-20161107195141-43ba34106c76
+## explicit
 github.com/cupcake/rdb
 github.com/cupcake/rdb/crc64
 github.com/cupcake/rdb/nopdecoder
 # github.com/edsrzf/mmap-go v0.0.0-20170320065105-0bce6a688712
+## explicit
 github.com/edsrzf/mmap-go
 # github.com/glendc/gopher-json v0.0.0-20170414221815-dc4743023d0c
+## explicit
 github.com/glendc/gopher-json
 # github.com/golang/snappy v0.0.0-20170215233205-553a64147049
+## explicit
 github.com/golang/snappy
+# github.com/gomodule/redigo v2.0.0+incompatible
+## explicit
+# github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e
+## explicit; go 1.12
+# github.com/onsi/ginkgo v1.12.0
+## explicit; go 1.12
+# github.com/onsi/gomega v1.7.1
+## explicit
 # github.com/pelletier/go-toml v1.0.1
+## explicit
 github.com/pelletier/go-toml
+# github.com/pelletier/go-toml/v2 v2.2.3
+## explicit; go 1.21.0
+github.com/pelletier/go-toml/v2
+github.com/pelletier/go-toml/v2/internal/characters
+github.com/pelletier/go-toml/v2/internal/danger
+github.com/pelletier/go-toml/v2/internal/tracker
+github.com/pelletier/go-toml/v2/unstable
 # github.com/peterh/liner v1.0.1-0.20171122030339-3681c2a91233
+## explicit
 github.com/peterh/liner
 # github.com/siddontang/go v0.0.0-20170517070808-cb568a3e5cc0
+## explicit
 github.com/siddontang/go/bson
 github.com/siddontang/go/filelock
 github.com/siddontang/go/hack
@@ -22,10 +50,13 @@ github.com/siddontang/go/num
 github.com/siddontang/go/snappy
 github.com/siddontang/go/sync2
 # github.com/siddontang/goredis v0.0.0-20150324035039-760763f78400
+## explicit
 github.com/siddontang/goredis
 # github.com/siddontang/rdb v0.0.0-20150307021120-fc89ed2e418d
+## explicit
 github.com/siddontang/rdb
 # github.com/syndtr/goleveldb v0.0.0-20160425020131-cfa635847112
+## explicit
 github.com/syndtr/goleveldb/leveldb
 github.com/syndtr/goleveldb/leveldb/cache
 github.com/syndtr/goleveldb/leveldb/comparer
@@ -39,11 +70,20 @@ github.com/syndtr/goleveldb/leveldb/storage
 github.com/syndtr/goleveldb/leveldb/table
 github.com/syndtr/goleveldb/leveldb/util
 # github.com/ugorji/go v0.0.0-20171122102828-84cb69a8af83
+## explicit
 github.com/ugorji/go/codec
 # github.com/yuin/gopher-lua v0.0.0-20171031051903-609c9cd26973
+## explicit
 github.com/yuin/gopher-lua
 github.com/yuin/gopher-lua/ast
 github.com/yuin/gopher-lua/parse
 github.com/yuin/gopher-lua/pm
 # golang.org/x/net v0.0.0-20180906233101-161cd47e91fd
+## explicit
 golang.org/x/net/context
+# gopkg.in/check.v1 v1.0.0-20200227125254-8fa46927fb4f
+## explicit
+# gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
+## explicit
+# gopkg.in/yaml.v2 v2.2.8
+## explicit

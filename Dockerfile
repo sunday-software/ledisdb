@@ -1,5 +1,5 @@
 # use builder image to compile ledisdb (without GCO)
-FROM golang:1.23-bookworm as builder
+FROM golang:1.23-bookworm AS builder
 
 ENV LEDISDB_VERSION 0.6
 
